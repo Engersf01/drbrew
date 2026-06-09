@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dr.breW — just what the doctor ordered</title>
+  <meta name="description" content="dr.breW — just what the doctor ordered. Powered by DLAB." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="dr.breW" />
+  <meta property="og:description" content="just what the doctor ordered" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://drbrew.beer/" />
+
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90' font-weight='900' font-family='Georgia,serif'&gt;W&lt;/text&gt;&lt;/svg&gt;" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <h1 class="wordmark" aria-label="dr.breW">
+      <span class="dr">dr.</span><span class="bre">bre</span><span class="w">W</span>
+    </h1>
+
+    <p class="tagline">just what the doctor ordered</p>
+
+    <div class="powered">
+      <span class="powered-label">powered by</span>
+      <span class="dlab">D<span class="flask" aria-hidden="true">L</span>AB</span>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="mailto:hello@drbrew.beer">hello@drbrew.beer</a>
+    <span class="dot">·</span>
+    <span>&copy; <span id="year"></span> dr.breW</span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

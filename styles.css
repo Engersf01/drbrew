@@ -1,0 +1,141 @@
+:root {
+  --ink: #0a0a0a;
+  --grey: #6b6b6b;
+  --light: #9a9a9a;
+  --dlab-blue: #1f6f9c;
+  --bg: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  padding: 2rem;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Wordmark */
+.wordmark {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 16vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  background: linear-gradient(100deg, #050505 0%, #1a1a1a 45%, #7c7c7c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.wordmark .w {
+  font-style: italic;
+  margin-left: -0.02em;
+}
+
+/* Tagline */
+.tagline {
+  font-weight: 700;
+  font-size: clamp(1rem, 4.5vw, 2.4rem);
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+/* Powered by */
+.powered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.powered-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--light);
+}
+
+.dlab {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 7vw, 2.6rem);
+  letter-spacing: 0.04em;
+  color: var(--dlab-blue);
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 1.4rem;
+  left: 0;
+  right: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--light);
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  color: var(--grey);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--ink);
+}
+
+.dot {
+  opacity: 0.6;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage {
+    animation: none;
+  }
+}
