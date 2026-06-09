@@ -21,14 +21,37 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="stage">
-    <img class="logo" src="logo.png" alt="dr.breW — just what the doctor ordered, powered by DLAB" />
+  <!-- Fullscreen film behind the doors -->
+  <div class="video-stage">
+    <video id="filmPlayer" playsinline preload="auto" controls>
+      <source src="drbrew-lab.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-    <button class="watch-btn" id="watchBtn" type="button" aria-haspopup="dialog">
-      <span class="play-icon" aria-hidden="true">▶</span>
-      Watch the film
+  <!-- The landing "doors" — split down the middle, swing open on start -->
+  <div class="curtain" id="curtain">
+    <div class="door left">
+      <div class="face">
+        <img class="logo" src="logo.png" alt="dr.breW — just what the doctor ordered, powered by DLAB" />
+        <span class="start-btn placeholder" aria-hidden="true"><span class="play-icon">▶</span> Click To Start</span>
+      </div>
+    </div>
+    <div class="door right">
+      <div class="face">
+        <img class="logo" src="logo.png" alt="" aria-hidden="true" />
+        <span class="start-btn placeholder" aria-hidden="true"><span class="play-icon">▶</span> Click To Start</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real, single clickable button aligned over the doors -->
+  <div class="start-layer" id="startLayer">
+    <div class="logo-box" aria-hidden="true"></div>
+    <button class="start-btn" id="startBtn" type="button">
+      <span class="play-icon" aria-hidden="true">▶</span> Click To Start
     </button>
-  </main>
+  </div>
 
   <footer class="footer">
     <a href="mailto:hello@drbrew.beer">hello@drbrew.beer</a>
@@ -36,51 +59,33 @@
     <span>&copy; <span id="year"></span> dr.breW</span>
   </footer>
 
-  <!-- Video modal -->
-  <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="dr.breW film" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-body">
-      <button class="modal-close" id="closeBtn" type="button" aria-label="Close video">&times;</button>
-      <video id="filmPlayer" controls playsinline preload="metadata" poster="logo.png">
-        <source src="drbrew-lab.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
-
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const modal = document.getElementById('videoModal');
+    const curtain = document.getElementById('curtain');
+    const startBtn = document.getElementById('startBtn');
     const player = document.getElementById('filmPlayer');
-    const watchBtn = document.getElementById('watchBtn');
-    const closeBtn = document.getElementById('closeBtn');
 
-    function openModal() {
-      modal.hidden = false;
-      document.body.classList.add('no-scroll');
-      // play once visible
+    let opened = false;
+    function start() {
+      if (opened) return;
+      opened = true;
+
+      document.body.classList.add('started'); // fades button + footer
+      curtain.classList.add('open');          // swings the doors
+
+      // play the film full-screen (click is a user gesture, so audio is allowed)
       player.currentTime = 0;
       const p = player.play();
       if (p && p.catch) p.catch(function () {});
-      closeBtn.focus();
+
+      // once the doors have swung away, let them go so the film is fully interactive
+      setTimeout(function () {
+        curtain.classList.add('gone');
+      }, 1250);
     }
 
-    function closeModal() {
-      player.pause();
-      modal.hidden = true;
-      document.body.classList.remove('no-scroll');
-      watchBtn.focus();
-    }
-
-    watchBtn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function (e) {
-      if (e.target.hasAttribute('data-close')) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !modal.hidden) closeModal();
-    });
+    startBtn.addEventListener('click', start);
   </script>
 </body>
 </html>
